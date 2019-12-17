@@ -29,19 +29,23 @@ class Login extends Component  {
         this.setState({
             isFetching: true
         })
-        this.setState({
-            credentials: {
-                username: '',
-                password: ''
-            }
-        })
-
+        
         //setup 'axiosWithAuth' for login
         // '/login' --> baseURL
-        axiosWithAuth().post('/login', this.state.credentials)
+        axiosWithAuth()
+            .post('/login', this.state.credentials)
             .then(response => {
                 console.log(response)
-                // localStorage.setItem('token', response.data.payload)
+                localStorage.setItem('token', response.data.payload)
+
+                //sets values to empty
+                this.setState({
+                    credentials: {
+                        username: '',
+                        password: ''
+                    }
+                })
+                this.props.history.push('/FriendsList')
             })
             .catch(error => {
                 console.log('No data returned', error)
@@ -50,10 +54,11 @@ class Login extends Component  {
 
         
     render(){
+        console.log(this.state)
         return(
             <div>
                 <h1>Login component</h1>
-                <form>
+                <form onSubmit={this.handleSubmit} >
                     <input 
                         type='text'
                         name='username'
@@ -68,7 +73,7 @@ class Login extends Component  {
                         value={this.state.credentials.password}
                         onChange={this.handleInputChanges}
                     />
-                    <button>Login to friends app</button>{this.state.isFetching && 'logging in'}
+                    <button type='submit'>Login to friends app</button>{this.state.isFetching && 'logging in'}
                 </form>
             </div>
         )
