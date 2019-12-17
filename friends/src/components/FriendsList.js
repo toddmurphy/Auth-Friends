@@ -4,7 +4,8 @@ import FriendsCard from './FriendsCard';
 const FriendsList = () => {
     return(
         <div>
-            <h3>FriendsList component --> display all friends</h3>
+            <h3>FriendsList component --> display all friends</h3>  
+                     
             <FriendsCard />
         </div>
     )

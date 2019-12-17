@@ -14,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/Login' component={Login} />
+        {/* protected route required --> FriendsList */}
         <Route exact path='/FriendsList' component={FriendsList} />
       </Switch>
     </div>
