@@ -11,8 +11,23 @@ const CardContainer = styled.div`
     background: dodgerblue;
     color: #FFF;
     width: 80%;
+`
+const ButtonStyle = styled.button`
+    width: 30%;
+    height: 40px;
+    margin: auto;
+    border-radius: 5px;
+    border-color: #FFF;
+    background: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #FFF;
+    margin: 3% 2%;
+    padding: 2%;
+
     &:hover {
         background: salmon;
+        border: none;
     }
 `
 
@@ -25,6 +40,8 @@ const FriendsCard = (props) => {
             <p>Name: {name}</p>
             <p>Age: {age}</p>
             <p>Email: {email}</p>
+            <ButtonStyle>Edit</ButtonStyle>
+            <ButtonStyle>Delete</ButtonStyle>
             </CardContainer>
         </CardWrapper>
     )

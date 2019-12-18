@@ -3,6 +3,9 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
+
+
+
 const TextInput = styled.input`
     margin: 1% 3%;
     height: 40px;
@@ -124,12 +127,3 @@ name: "Rachel Green"
 age: 30
 email: "rachel@friends.com" */
 
-//Spinner --> isAdding
-{/* <Loader
-         type="Puff"
-         color="#00BFFF"
-         height={100}
-         width={100}
-         timeout={3000} //3 secs
-
-      /> */}
