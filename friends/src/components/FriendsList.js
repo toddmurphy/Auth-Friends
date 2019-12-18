@@ -6,6 +6,8 @@ import CreateFriend from './CreateFriend';
 const FriendsList = () => {
     //setup useState for store friends state/data
     const [friendsData, setFriendsData] = useState([])
+    //this triggers a change in useEffect to re-fetch the data
+    const [isFetching, setIsFetching] = useState(false)
 
     //setup useEffect --> get request to get friends from api to map over and send to 'FriendsCard'
     useEffect(() => {
@@ -18,11 +20,11 @@ const FriendsList = () => {
             .catch(error => {
                 console.log('No friends data returned', error)
             })
-    }, [])
+    }, [isFetching])
 
     return(
         <div>
-            <CreateFriend />
+            <CreateFriend isFetching={isFetching} setIsFetching={setIsFetching} />
             {friendsData.map(friend => {
                 return <FriendsCard key={friend.id} friend={friend}  />
             })}
