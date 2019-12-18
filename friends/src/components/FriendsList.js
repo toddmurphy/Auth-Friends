@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import FriendsCard from './FriendsCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import CreateFriend from './CreateFriend';
 
 const FriendsList = () => {
     //setup useState for store friends state/data
@@ -21,6 +22,7 @@ const FriendsList = () => {
 
     return(
         <div>
+            <CreateFriend />
             {friendsData.map(friend => {
                 return <FriendsCard key={friend.id} friend={friend}  />
             })}
