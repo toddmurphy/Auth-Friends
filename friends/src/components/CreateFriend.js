@@ -10,8 +10,13 @@ const CreateFriend = () => {
         id: Date.now()
     })
 
-    //handleChangeInput
-
+    //handleInputChanges
+    const handleInputChanges = (event) => {
+       setNewFriend({
+           ...newFriend,
+           [event.target.name]: event.target.value
+       })
+    }
 
     //handleSubmit --> use 'axiosWithAuth()' to post new friend inside handleSubmit
 
@@ -24,22 +29,22 @@ const CreateFriend = () => {
                     type='name'
                     name='name'
                     placeholder='Name'
-                    // value={}
-                    // onChange={}
+                    value={newFriend.name}
+                    onChange={handleInputChanges}
                 />
                 <input 
                     type="age"
                     name='age'
                     placeholder='Age'
-                    //value={}
-                    //onChange={}
+                    value={newFriend.age}
+                    onChange={han}
                 />
                 <input 
                     type='email'
                     name='email'
                     placeholder='Email'
-                    //value={}
-                    //onChange={}
+                    value={newFriend.email}
+                    onChange={handleInputChanges}
                 />
                 <button type='submit'>Add new friend</button>
             </form>
