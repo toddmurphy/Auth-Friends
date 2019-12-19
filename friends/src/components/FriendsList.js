@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import FriendsCard from './FriendsCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import CreateFriend from './CreateFriend';
+import UpdateFriend from './UpdateFriend';
 
 const FriendsList = (props) => {
     //setup useState for store friends state/data

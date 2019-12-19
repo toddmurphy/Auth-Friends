@@ -35,7 +35,6 @@ const UpdateFriend = (props) => {
         age: '',
         email: '',
     })
-
     
     //setup useEffect to get friends data from api using ID -->
     useEffect(() => {
@@ -63,14 +62,11 @@ const UpdateFriend = (props) => {
     //handleEditSubmit
     const handleEditSubmit = (event) => {
         event.preventDefault();
-      
 
         axiosWithAuth()
             .put(`/friends/${props.match.params.id}`, updateFriend)
             .then(response => {
                 console.log(response.data)
-
-                
             })
             .catch(error => {
                 console.log('Sorry, friend not updated', error)
@@ -106,14 +102,6 @@ const UpdateFriend = (props) => {
                     value={updateFriend.email}
                     onChange={handleInputChanges}
                 />
-                {/* {isUpdating && 
-                    <Loader
-                    type="Puff"
-                    color="#00BFFF"
-                    height={100}
-                    width={100}
-                    />
-                } */}
                 <ButtonStyle type='submit'>Update friend</ButtonStyle>
             </form>
         </div>
