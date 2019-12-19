@@ -33,7 +33,7 @@ const CreateFriend = (props) => {
     //setup useState to store date and setup initial state
     const [newFriend, setNewFriend] = useState({
         name: '',
-        age: Number,
+        age: '',
         email: '',
     })
 
@@ -68,7 +68,7 @@ const CreateFriend = (props) => {
                 })
 
                 setIsAdding(false)
-                //triggers re-render of parent component --> passed FriendsList as props
+                //triggers re-render of parent component because of a change a user was added--> passed FriendsList as props
                 props.setIsFetching(!props.isFetching)
             })
             .catch(error => {
@@ -84,14 +84,14 @@ const CreateFriend = (props) => {
             <h3>Add a new friend to the family...</h3>
             <form onSubmit={handleSubmit}>
                 <TextInput 
-                    type='name'
+                    type='text'
                     name='name'
                     placeholder='Name'
                     value={newFriend.name}
                     onChange={handleInputChanges}
                 />
                 <TextInput 
-                    type="age"
+                    type="number"
                     name='age'
                     placeholder='Age'
                     value={newFriend.age}

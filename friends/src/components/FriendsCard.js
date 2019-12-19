@@ -31,17 +31,26 @@ const ButtonStyle = styled.button`
     }
 `
 
+
 const FriendsCard = (props) => {
     const { id, name, age, email } = props.friend;
+
+    //handleEditClick
+    const handleEditClick = (event) => {
+        event.preventDefault();
+
+        props.history.push('/UpdateFriend')
+    }
+
     return (
         <CardWrapper>
             <CardContainer>
-            <p>ID: {id}</p>
-            <p>Name: {name}</p>
-            <p>Age: {age}</p>
-            <p>Email: {email}</p>
-            <ButtonStyle>Edit</ButtonStyle>
-            <ButtonStyle>Delete</ButtonStyle>
+                <p>ID: {id}</p>
+                <p>Name: {name}</p>
+                <p>Age: {age}</p>
+                <p>Email: {email}</p>
+                <ButtonStyle onClick={handleEditClick} >Edit</ButtonStyle>
+                <ButtonStyle>Delete</ButtonStyle>
             </CardContainer>
         </CardWrapper>
     )

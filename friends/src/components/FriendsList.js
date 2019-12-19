@@ -3,7 +3,7 @@ import FriendsCard from './FriendsCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import CreateFriend from './CreateFriend';
 
-const FriendsList = () => {
+const FriendsList = (props) => {
     //setup useState for store friends state/data
     const [friendsData, setFriendsData] = useState([])
     //this triggers a change in useEffect to re-fetch the data
@@ -26,7 +26,7 @@ const FriendsList = () => {
         <div>
             <CreateFriend isFetching={isFetching} setIsFetching={setIsFetching} />
             {friendsData.map(friend => {
-                return <FriendsCard key={friend.id} friend={friend}  />
+                return <FriendsCard key={friend.id} friend={friend} history={props.history} />
             })}
         </div>
     )
