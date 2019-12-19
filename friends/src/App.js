@@ -18,7 +18,7 @@ function App() {
         <Route exact path='/Login' component={Login} />
         {/* protected route required --> FriendsList */}
         <PrivateRoute exact path='/FriendsList' component={FriendsList} />
-        <PrivateRoute exact path='/UpdateFriend' component={UpdateFriend} />
+        <PrivateRoute exact path='/UpdateFriend/:id' component={UpdateFriend} />
       </Switch>
     </div>
   );

@@ -26,7 +26,14 @@ const FriendsList = (props) => {
         <div>
             <CreateFriend isFetching={isFetching} setIsFetching={setIsFetching} />
             {friendsData.map(friend => {
-                return <FriendsCard key={friend.id} friend={friend} history={props.history} />
+                return <FriendsCard
+                         key={friend.id} 
+                         friend={friend} 
+                         history={props.history} 
+                         match={props.match} 
+                         isFetching={isFetching} 
+                         setIsFetching={setIsFetching} 
+                         />
             })}
         </div>
     )

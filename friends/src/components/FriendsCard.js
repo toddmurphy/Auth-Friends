@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+
 
 const CardWrapper = styled.div`
     margin: 3% 0;
@@ -39,8 +41,28 @@ const FriendsCard = (props) => {
     const handleEditClick = (event) => {
         event.preventDefault();
 
-        props.history.push('/UpdateFriend')
+        props.history.push(`/UpdateFriend/${id}`)
     }
+
+    //handleDeleteFriend
+    //axiosWithAuth delete api --> /friends/:id
+    const handleDeleteFriend = (event) => {
+        event.preventDefault();
+
+        axiosWithAuth()
+            .delete(`/friends/${id}`)
+            .then(response => {
+                console.log(response.data)
+                
+                props.history.push(`/FriendsList`)
+                //exported from FriendsList --> triggers re-render or useEffect in FriendsList to reload data each delete
+                props.setIsFetching(!props.isFetching)
+            })
+            .catch(error => {
+                console.log('Friend Deleted', error)
+            })
+    }
+
 
     return (
         <CardWrapper>
@@ -50,7 +72,7 @@ const FriendsCard = (props) => {
                 <p>Age: {age}</p>
                 <p>Email: {email}</p>
                 <ButtonStyle onClick={handleEditClick} >Edit</ButtonStyle>
-                <ButtonStyle>Delete</ButtonStyle>
+                <ButtonStyle onClick={handleDeleteFriend} >Delete</ButtonStyle>
             </CardContainer>
         </CardWrapper>
     )

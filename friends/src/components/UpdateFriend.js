@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
-import axiosWithAuth from '../utils/axiosWithAuth';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
+
 
 const TextInput = styled.input`
     margin: 1% 3%;
@@ -28,12 +29,27 @@ const ButtonStyle = styled.button`
 `
 
 
-const UpdateFriend = () => {
+const UpdateFriend = (props) => {
     const [updateFriend, setUpdateFriend] = useState({
         name: '',
         age: '',
         email: '',
     })
+
+    
+    //setup useEffect to get friends data from api using ID -->
+    useEffect(() => {
+        axiosWithAuth()
+            .get(`/friends/${props.match.params.id}`)
+            .then(response => {
+                console.log(response.data)
+                setUpdateFriend(response.data)
+            })
+            .catch(error => {
+                console.log('Sorry, no data by id', error)
+            })
+    }, [props.match.params.id])
+
 
     //handleInputChanges
     const handleInputChanges = (event) => {
@@ -43,14 +59,32 @@ const UpdateFriend = () => {
         })
     }
 
+    //subit data back to api
     //handleEditSubmit
+    const handleEditSubmit = (event) => {
+        event.preventDefault();
+      
+
+        axiosWithAuth()
+            .put(`/friends/${props.match.params.id}`, updateFriend)
+            .then(response => {
+                console.log(response.data)
+
+                
+            })
+            .catch(error => {
+                console.log('Sorry, friend not updated', error)
+            })
+            props.history.push(`/FriendsList`)
+
+    }
 
 
 
     return(
         <div>
             <h3>Update friend component</h3>
-            <form>
+            <form onSubmit={handleEditSubmit}>
                 <TextInput 
                     type='text'
                     name='name'
@@ -72,7 +106,7 @@ const UpdateFriend = () => {
                     value={updateFriend.email}
                     onChange={handleInputChanges}
                 />
-                {/* {isAdding && 
+                {/* {isUpdating && 
                     <Loader
                     type="Puff"
                     color="#00BFFF"
