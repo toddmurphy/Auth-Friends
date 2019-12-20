@@ -35,6 +35,8 @@ const UpdateFriend = (props) => {
         age: '',
         email: '',
     })
+
+    const [isUpdating, setIsUpdating] = useState(false)
     
     //setup useEffect to get friends data from api using ID -->
     useEffect(() => {
@@ -102,6 +104,14 @@ const UpdateFriend = (props) => {
                     value={updateFriend.email}
                     onChange={handleInputChanges}
                 />
+                {isUpdating && 
+                    <Loader
+                    type="Puff"
+                    color="#00BFFF"
+                    height={100}
+                    width={100}
+                    />
+                }
                 <ButtonStyle type='submit'>Update friend</ButtonStyle>
             </form>
         </div>

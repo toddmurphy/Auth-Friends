@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
+
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
@@ -36,6 +38,8 @@ const ButtonStyle = styled.button`
 
 const FriendsCard = (props) => {
     const { id, name, age, email } = props.friend;
+    
+    const [isDeleting, setIsDeleting] = useState(false)
 
     //handleEditClick
     const handleEditClick = (event) => {
@@ -48,15 +52,18 @@ const FriendsCard = (props) => {
     //axiosWithAuth delete api --> /friends/:id
     const handleDeleteFriend = (event) => {
         event.preventDefault();
+        setIsDeleting(true)
 
         axiosWithAuth()
             .delete(`/friends/${id}`)
             .then(response => {
                 console.log(response.data)
                 
+                setIsDeleting(false)
                 props.history.push(`/FriendsList`)
                 //exported from FriendsList --> triggers re-render or useEffect in FriendsList to reload data each delete
                 props.setIsFetching(!props.isFetching)
+                
             })
             .catch(error => {
                 console.log('Friend Deleted', error)
@@ -71,6 +78,14 @@ const FriendsCard = (props) => {
                 <p>Name: {name}</p>
                 <p>Age: {age}</p>
                 <p>Email: {email}</p>
+                {isDeleting && 
+                    <Loader
+                    type="Puff"
+                    color="#00BFFF"
+                    height={100}
+                    width={100}
+                    />
+                }
                 <ButtonStyle onClick={handleEditClick} >Edit</ButtonStyle>
                 <ButtonStyle onClick={handleDeleteFriend} >Delete</ButtonStyle>
             </CardContainer>
