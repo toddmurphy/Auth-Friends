@@ -64,17 +64,20 @@ const UpdateFriend = (props) => {
     //handleEditSubmit
     const handleEditSubmit = (event) => {
         event.preventDefault();
-
+        setIsUpdating(true)
+        
         axiosWithAuth()
             .put(`/friends/${props.match.params.id}`, updateFriend)
             .then(response => {
                 console.log(response.data)
+                setIsUpdating(false)
             })
             .catch(error => {
                 console.log('Sorry, friend not updated', error)
             })
+            
             props.history.push(`/FriendsList`)
-
+            
     }
 
 
