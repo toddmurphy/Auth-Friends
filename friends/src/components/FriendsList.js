@@ -42,6 +42,8 @@ const FriendsList = (props) => {
                                 //               location={props.location}
                                 
                                 friend={friend}
+                                isFetching={isFetching}
+                                setIsFetching={setIsFetching} 
                             />
                             )}
                         />
