@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import FriendsCard from './FriendsCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import CreateFriend from './CreateFriend';
-import UpdateFriend from './UpdateFriend';
+
+import  {Route} from 'react-router-dom';
 
 const FriendsList = (props) => {
     //setup useState for store friends state/data
@@ -17,24 +18,33 @@ const FriendsList = (props) => {
             .then(response => {
                 console.log(response.data)
                 setFriendsData(response.data)
+                
             })
             .catch(error => {
                 console.log('No friends data returned', error)
             })
+
+            // return () => {
+            //     cleanup
+            // }
     }, [isFetching])
 
     return(
         <div>
             <CreateFriend isFetching={isFetching} setIsFetching={setIsFetching} />
             {friendsData.map(friend => {
-                return <FriendsCard
-                         key={friend.id} 
-                         friend={friend} 
-                         history={props.history} 
-                         match={props.match} 
-                         isFetching={isFetching} 
-                         setIsFetching={setIsFetching} 
-                         />
+                return <Route key={friend.id}  
+                            render={props => (
+                            <FriendsCard
+                                {...props} // this is the same as below
+                                //               match={props.match}
+                                //               history={props.history}
+                                //               location={props.location}
+                                
+                                friend={friend}
+                            />
+                            )}
+                        />
             })}
         </div>
     )
@@ -47,3 +57,12 @@ id: 1
 name: "Rachel Green"
 age: 30
 email: "rachel@friends.com" */
+
+/* return <FriendsCard
+                         key={friend.id} 
+                         friend={friend} 
+                         history={props.history} 
+                         match={props.match} 
+                         isFetching={isFetching} 
+                         setIsFetching={setIsFetching} 
+                         /> */

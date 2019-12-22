@@ -44,7 +44,10 @@ const UpdateFriend = (props) => {
             .get(`/friends/${props.match.params.id}`)
             .then(response => {
                 console.log(response.data)
+               
+
                 setUpdateFriend(response.data)
+                
             })
             .catch(error => {
                 console.log('Sorry, no data by id', error)

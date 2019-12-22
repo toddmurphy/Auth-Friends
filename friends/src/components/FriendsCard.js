@@ -37,7 +37,7 @@ const ButtonStyle = styled.button`
 
 
 const FriendsCard = (props) => {
-    const { id, name, age, email } = props.friend;
+    const { id, name, age, email, isFetching, setIsFetching } = props.friend;
     
     const [isDeleting, setIsDeleting] = useState(false)
 
@@ -62,7 +62,7 @@ const FriendsCard = (props) => {
                 setIsDeleting(false)
                 props.history.push(`/FriendsList`)
                 //exported from FriendsList --> triggers re-render or useEffect in FriendsList to reload data each delete
-                props.setIsFetching(!props.isFetching)
+                setIsFetching(!isFetching)
                 
             })
             .catch(error => {
